@@ -2,7 +2,7 @@
 
 ## Server UML
 
-<img src='authapiwb.png'>
+<img src='uml.png'>
 
 ### Servers
 
