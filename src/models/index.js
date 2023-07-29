@@ -9,10 +9,10 @@ const DATABASE_URL =
   process.env.NODE_ENV === 'test' ? 'sqlite::memory:' : process.env.DATABASE_URL;
 
 const sequelize = new Sequelize(DATABASE_URL);
-const bats = batModel(sequelize, DataTypes);
+const batsModelNoConnection = batModel(sequelize, DataTypes);
 
 module.exports = {
   db: sequelize,
   users: userModel(sequelize, DataTypes),
-  batsCollection: new Collection(bats)
+  bats: new Collection(batsModelNoConnection)
 };
