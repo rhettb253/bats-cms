@@ -49,14 +49,14 @@ describe('ACL Integration', () => {
     // expect(res.text).toEqual('Welcome to the secret area');
   });
 
-  // test('the user with membershipCustomer capabilities should NOT be able to update a model', async () => {
-  //   let res = await mockReq
-  //     .put('/api/v2/food/2')
-  //     .send({ name: 'coconut', calories: 200, type: 'fruit' })
-  //     .set('Authorization', `Bearer ${membershipCustomer.token}`);
-  //   expect(res.status).toBe(500);
-  //   expect(res.body.message).toEqual('Access Denied');
-  // });
+  test('the user with membershipCustomer capabilities should NOT be able to update a model', async () => {
+    let res = await mockReq
+      .put('/bats/1')
+      .send({ price: 40, stock: 15 })
+      .set('Authorization', `Bearer ${membershipCustomer.token}`);
+    expect(res.status).toBe(500);
+    expect(res.body.message).toEqual('Access Denied');
+  });
 
   // test('the user with admin capabilities should be able to update a model', async () => {
   //   let res = await mockReq
