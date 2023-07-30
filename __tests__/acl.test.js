@@ -41,7 +41,7 @@ describe('ACL Integration', () => {
     expect(res.body.id).toEqual(1);
   });
 
-  test('the user should be able to get a resource', async () => {
+  test('any user should be able to get a resource', async () => {
     let res = await mockReq
       .get('/bats/1')
       .set('Authorization', `Bearer ${membershipCustomer.token}`);
@@ -58,20 +58,20 @@ describe('ACL Integration', () => {
     expect(res.body.message).toEqual('Access Denied');
   });
 
-  // test('the user with admin capabilities should be able to update a model', async () => {
-  //   let res = await mockReq
-  //     .put('/api/v2/food/1')
-  //     .send({ name: 'coconut', calories: 200, type: 'fruit' })
-  //     .set('Authorization', `Bearer ${admin.token}`);
-  //   expect(res.status).toBe(200);
-  //   expect(res.body.name).toEqual('coconut');
-  // });
+  test('the user with admin capabilities should be able to update a model', async () => {
+    let res = await mockReq
+      .put('/bats/1')
+      .send({ price: 40, stock: 15 })
+      .set('Authorization', `Bearer ${admin.token}`);
+    expect(res.status).toBe(200);
+    expect(res.body.price).toEqual(40);
+  });
 
-  // test('the user with admin capabilities should be able to delete a model', async () => {
-  //   let res = await mockReq
-  //     .delete('/api/v2/food/1')
-  //     .set('Authorization', `Bearer ${admin.token}`);
-  //   expect(res.status).toBe(200);
-  // });
+  test('the user with admin capabilities should be able to delete a model', async () => {
+    let res = await mockReq
+      .delete('/bats/1')
+      .set('Authorization', `Bearer ${admin.token}`);
+    expect(res.status).toBe(200);
+  });
 
 });
